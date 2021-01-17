@@ -1,0 +1,179 @@
+import java.util.Scanner;
+class Ass1{
+     static int sum=0;
+  public static void main(String args[]){
+    Scanner obj=new Scanner(System.in);
+   int flag1=1,flag2=1,flag3=1;
+  boolean b=true;
+    do{
+       System.out.println("enter 1.English 2.Math 3.GK ");
+       int x=obj.nextInt();
+        out:
+        
+        switch(x){
+                  case 1:
+                        if(flag1==1){
+                           flag1=2;
+                         System.out.println("welcome to English test");
+                          obj.nextLine();
+                         System.out.println("1.Please don't forget to ring me when you ________home.");
+                          System.out.println("type 1. at or 2. get");
+                          int an1=obj.nextInt();
+                          
+                           if(an1==2){
+                              sum=sum+10;
+                          }
+                          System.out.println("2.The thief was sent to ________ prison");
+                           System.out.println("type 1. the or 2. a");
+                          int an2=obj.nextInt();
+                          
+                           if(an2==1){
+                              sum=sum+10;
+                          }
+                         System.out.println("3.our city will have ________ university soon.");
+                          System.out.println("type 1. the or 2. a");
+                         int an3=obj.nextInt();
+                          
+                           if(an3==2){
+                              sum=sum+10;
+                          }
+                           //System.out.println("sum="+sum);
+                            System.out.println("Do you want to continue  1.YES or 2.NO");
+                             int str1= obj.nextInt();
+                             if(str1==1){
+                                break out;
+                               }
+                            else{
+                             if(flag1==2 && flag2==2 && flag3==2){
+                                b=false;
+                                break;
+                                }
+                              else{
+                                    System.out.println("some works are pending");
+                                  break ;
+                                 }
+                            }
+                      }
+                      else{
+                           System.out.println("you have completed this section");
+                             if(flag1==2 && flag2==2 && flag3==2){
+                                b=false;
+                               }
+                           break;
+                       }
+                  case 2:
+                         if(flag2==1){
+                             flag2=2;
+                          System.out.println("welcome to Maths test");
+                          obj.nextLine();
+                         System.out.println("1.9+5");
+                          System.out.println("type 1. 14 or 2. 16");
+                         int an4=obj.nextInt();
+                          
+                           if(an4==1){
+                              sum=sum+10;
+                          }
+                          System.out.println("2.10-5");
+                          System.out.println("type 1. 5 or 2. 6");
+                         int an5=obj.nextInt();
+                          
+                           if(an5==1){
+                              sum=sum+10;
+                          }
+                         System.out.println("3.10/2");
+                          System.out.println("type 1. 6 or 2. 5");
+                         int an6=obj.nextInt();
+                          
+                           if(an6==2){
+                              sum=sum+10;
+                          }
+                          // System.out.println("sum="+sum);
+                       System.out.println("Do you want to continue  1.YES or 2.NO");
+                             int str2= obj.nextInt();
+                             if(str2==1){
+                                break out;
+                               }
+                             else{
+                                  if(flag1==2 && flag2==2 && flag3==2){
+                                  b=false;
+                                break;
+                                }
+                              else{
+                                    System.out.println("some works are pending");
+                                  break ;
+                                 }
+                                }
+                           }
+                       else{
+                           System.out.println("you have completed this section");
+                              if(flag1==2 && flag2==2 && flag3==2){
+                                b=false;
+                             }
+                           break;
+                       }
+
+                  case 3:
+                          if(flag3==1){
+                              flag3=2;
+                           System.out.println("welcome to GK test");
+                           obj.nextLine();
+                         System.out.println("1.which is the hottest planet in our solar system");
+                         System.out.println("type 1. Venus or 2. Saturn");
+                         int an7=obj.nextInt();
+                          
+                           if(an7==1){
+                              sum=sum+10;
+                          }
+                          System.out.println("2.which is the smallest planet in our solar system");
+                          System.out.println("type 1. Venus or 2. Mercury");
+                         int an8=obj.nextInt();
+                          
+                           if(an8==2){
+                              sum=sum+10;
+                          }
+                         System.out.println("3.what is the name of the largest moon of saturn");
+                          System.out.println("type 1. Titan or 2. Saturn");
+                         int an9=obj.nextInt();
+                          
+                           if(an9==1){
+                              sum=sum+10;
+                          }
+                         // System.out.println("sum="+sum);
+                        System.out.println("Do you want to continue  1.YES or 2.NO");
+                             int str3= obj.nextInt();
+                             if(str3==1){
+                                break out;
+                               }
+                             else{
+                                 if(flag1==2 && flag2==2 && flag3==2){
+                                 b=false;
+                                break;
+                                }
+                              else{
+                                    System.out.println("some works are pending ");
+                                  break ;
+                                 }
+                                }
+                 }
+                   else{
+                           System.out.println("you have completed this section");
+                             if(flag1==2 && flag2==2 && flag3==2){
+                                b=false;
+                               }
+                           break;
+                       }
+            }
+        }while(b);
+       int result=0;
+      if(sum>70){
+         result=sum+10;
+      }
+       if(result>=90){
+         System.out.println(" U ARE PASS IN THIS TEST, CONGRATULATIONS");
+      }
+      else{
+         System.out.println("BETTER LUCK NEXT TIME");
+       }
+    }
+  }
+     
