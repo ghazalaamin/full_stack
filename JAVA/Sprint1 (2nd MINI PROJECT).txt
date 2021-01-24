@@ -1,0 +1,186 @@
+ /*2nd Mini Project 
+Sprint 1
+Product  bean package 
+		pid, pname, price
+ProductService - service package 	don’t use System.out.println in service 
+			List/Set/Map of Product object. 
+			
+			Business methods 
+			addProduct : object as a parameter (product) from main 
+				product id must be unique 
+			display result in main 
+
+			updateProduct –object as parameter   
+					update price using pid 
+		
+			deleteProduct 	 pid 
+					delete using pid 
+
+			displayAllProudct() 
+						return all product 
+			retrieveProductPrice()
+
+					using productId  
+main
+
+		Product Operation 
+
+				Main Method 
+				do {
+					1:Add
+					2:Update 
+					3:Delete 
+					4:DisplayAll
+					5: price using Id 
+switch(){
+
+}
+}while() */
+
+
+package bean;
+
+public class Product {
+    private int pId;
+    private String pName;
+    private int pPrice;
+public int getpId() {
+	return pId;
+}
+public void setpId(int pId) {
+	this.pId = pId;
+}
+public String getpName() {
+	return pName;
+}
+public void setpName(String pName) {
+	this.pName = pName;
+}
+public int getpPrice() {
+	return pPrice;
+}
+public void setpPrice(int pPrice) {
+	this.pPrice = pPrice;
+}
+public Product() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+public Product(int pId, String pName, int pPrice) {
+	super();
+	this.pId = pId;
+	this.pName = pName;
+	this.pPrice = pPrice;
+}
+
+
+}
+
+
+package main;
+
+import service.ProductService;
+
+import java.util.*;
+
+import bean.Product;
+
+public class ProductOperations {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stu
+      Scanner obj=new Scanner(System.in);
+      //Map<Integer,Product> hm=new HashMap<Integer,Product>();
+      ProductService ps=new ProductService();
+	 
+      
+		do {
+			 System.out.println("Choose Operation you want to perform");
+		      System.out.println("1.Add Product");
+		      System.out.println("2.Update Product");
+		      System.out.println("3.Delete Product");
+		      System.out.println("4.Display All Product");
+		      System.out.println("5.Display price using Product Id");
+		      System.out.println("6.Exit System");
+			     int ch=obj.nextInt();
+			switch(ch) {
+			case 1:System.out.println("Enter number of Product Details u want to store");
+			       int n=obj.nextInt();
+			       System.out.println("Enter pId,pName,pPrice");
+			       
+			      // Product products=new Product[n];
+			            for(int i=0;i<n;i++) {
+						  int pId=obj.nextInt();
+						  String pName=obj.next();
+						  int pPrice=obj.nextInt();
+						  Product products=new Product(pId,pName,pPrice);
+			              ps.addProduct(products);
+			              System.out.println("product is added");
+			            }
+			      break;
+			case 2:System.out.println("enter pId and price u want to update");
+			      int pId=obj.nextInt();
+			      int pPrice=obj.nextInt();
+			      ps. updateProduct(pId,pPrice);
+				  System.out.println("Prices is update");
+				break ;
+			case 3:System.out.println("Enter pId to delete Product");
+			      int pId1=obj.nextInt();
+			      ps.deleteProduct(pId1);
+			      System.out.println("Element get deleted");
+				break;
+			case 4:System.out.println("your All Products Are");
+			      ps.displayAllProudct();
+				break;
+			case 5:System.out.println("Enter pId whose pPrice u want to display");
+			       int pId2=obj.nextInt();
+			      int price=ps.retrieveProductPrice(pId2);
+			      System.out.println("Price of the product is"+price);
+				break;
+			case 6:System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid Choice");
+		    }
+		}while(true);
+	}		
+}
+
+
+package service;
+
+import bean.Product;
+import java.util.*;
+import main.ProductOperations;
+
+public class ProductService {
+	//Scanner obj1=new Scanner(System.in);
+	
+	    Map<Integer,Product> hm=new HashMap<Integer,Product>();
+	    static int i=1;
+	    
+	public void addProduct(Product products){
+		 //Product[] products=new Product[n]
+		 hm.put(i,products);
+		 i++;
+		  }
+	  
+	public void updateProduct(int pId,int pPrice) {
+		Product p=hm.get(pId);
+		p.setpPrice(pPrice);
+		
+	}
+	public void deleteProduct(int pId) {
+		hm.remove(pId);
+	}
+	public void displayAllProudct() {
+		for(Integer keys:hm.keySet()) {
+			System.out.println(keys);
+		}
+	}
+	public int retrieveProductPrice(int pId){
+		Product p=hm.get(pId);
+		return p.getpId();
+	}
+}
+

@@ -1,0 +1,220 @@
+/*Assignment 4 
+
+Manager / Programmer is a Employee
+
+Employee has a Address 
+
+class Employee {			super class must be generic 
+	id,name,salary
+	Scanner obj = new Scanner(System.in);
+	Address add = new Address();
+	methods 
+	read()		id,name,salary
+
+, calSalary()			: hra, da and pf 
+dislay() 
+}
+
+
+class Manager extends Employee {	sub must be specific 
+	numberOfEmp  : numbers 
+	readMgr()		numberOfEmp
+			add.readAdd();
+	disMgr();
+			numberOfEmp
+				add.disAdd();
+}
+	class Programmer extends Employee{	sub must be specific 
+		projectName:	string 
+		readPrg()
+				projectName
+				add.readAdd();
+		disPrg();
+}
+	
+class Address {
+			city, state, pinCode 
+			Scanner obj = new Scanner();       {rtclick+sourse+add settergetter}
+			readAdd()
+					read city,state and pincode 
+			disAdd();
+					city, state and pincode 
+}
+	
+	EmployeeTest 
+			Main 			Don’t create the Employee class object. 
+	S.O.P(ManagerDetails);
+Manager mgr
+		mgr.read()		3 details 
+		mgr.readMgr()	1 own details, 3 address details 
+		
+S.O.P(ProgramerDetails)
+Programmer prg 
+		prg.read()
+		prg.readPrg()
+		
+	mgr.calSalary();
+	prg.calSalary()
+
+
+	Display Manager and Programmer details. */
+
+
+
+
+
+
+
+import java.util.*;
+
+class Employee {			super class must be generic 
+	int id;
+        String name;
+        int salary;
+	Scanner obj = new Scanner(System.in);
+	Address add = new Address();
+	
+	void read(){
+            System.out.println("enter employee id");
+           id=obj.nextInt();
+            System.out.println("enter employee name");
+           name=obj.next();
+            System.out.println("enter employee salary");
+           salary=obj.nextInt();      		
+         }
+        
+      int calSalary(){
+           int income;
+           income= salary+(10*salary)/100 + (7*salary)/100 - (5*salary)/100;
+          for(int i=0;i<n;i++){
+            
+              if( designation[i].equals("manager"){
+                income=income + (income*15)/100;
+                 System.out.println("salary="+ salary[i]);
+               }
+             else if(designation[i].equals("developer"){
+                income=income + (income*10)/100;
+                System.out.println("salary="+ salary[i]);
+              }
+              else{
+                income=income + (income*5)/100;
+                System.out.println("salary="+ salary[i]);
+             }
+           }
+         }
+         		
+        
+         void display(){
+             for(int i=0;i<n;i++){
+              System.out.println("id="+id[i]);
+             System.out.println(" name="+ name[i]);
+             System.out.println(" salary="+calSalary(salary[i]));
+             System.out.println("designation="+designation[i]);
+           } 
+         }
+
+}
+ 
+
+
+class Manager extends Employee{
+    int numberOfEmp;
+	void readMgr(){
+             System.out.println("enter number of employess");
+             numberOfEmp=obj.nextInt();
+             add.readAdd();
+            }	
+			
+	void disMgr(){
+            System.out.println("number of employees are"+numberOfEmp);
+            add.disAdd();
+           }
+			
+				
+}
+
+class Programmer extends Employee{	 
+		String projectName;	
+	  void readPrg(){
+             System.out.println("enter project name");
+             projectName=obj.next();
+             add.readAdd();
+              }
+	  void disPrg(){
+             System.out.println("your project name is"+ projectName);
+             add.disAdd();
+             }
+}
+
+
+class Address {
+     String city;
+     String state;
+     int pinCode; 
+	Scanner obj = new Scanner();                                  
+     void readAdd(){
+         System.out.println("enter city");
+         city=obj.next();
+        System.out.println("enter state");
+         state=obj.next();
+        System.out.println("enter pincode");
+         pinCode=obj.nextInt();
+          }
+					
+     void disAdd(){
+          System.out.println("your city is"+city);
+          System.out.println("your state is"+state);
+         System.out.println("your pincode is"+pinCode);
+         }
+					
+}
+   
+class EmployeeTest{
+  public static void main(String[] args){
+      System.out.println("Manager Details");
+        Manager mg= new  Manager();
+         mg.read();
+         mg.readMgr();
+         mg.calSalary();
+      System.out.println("Programer Details");
+      Programmer prg=new Programer();
+	   prg.read();
+           prg.readPrg();
+           prg.calSalary();
+       }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

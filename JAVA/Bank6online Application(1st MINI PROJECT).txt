@@ -1,0 +1,325 @@
+/*Assignment 6:
+
+Small Mini Projects 
+
+Menu Driven Application 
+
+Banking Application 
+
+1.Create Account
+a.Default Details	:  1010,1011,1012 Unknown, 500
+b.Name and Amount  : 1013,Raj, 600 amount >= 500 
+2.Check Account Balance 
+3.Withdraw the amount 
+4.Deposit 
+5.Transfer 
+
+
+abstract class AccountInitialization {
+		static int accountCount=0;
+Account accounts[]=new Account[10];
+		Start with 1010 (account number )
+void accountCreate() {
+						account Number must be unique 
+					name =”Unknown”
+					amount =500;
+		Account ac = new Account(accno,Unknown,500);
+		accounts[acountCount]
+		accountCount++;			
+}
+void accountCreate(name,amount) {
+		accno must be unique	
+amount > 500  then crate account
+		assign name and amount 
+Account acc = new Account(uniqueNumber);
+Call helper to set name and amount;
+accounts[acountCount]
+accountCount++;			
+}
+abstract void transfer(fromaccNo,toAccNo,amount);
+}
+
+interface Bank 
+			void withdraw 		: accno, amount 
+			void deposit 		: accno, amount 
+			void checkBalance 	: accno	
+all abstract methods 
+
+class Account 
+			private Accno
+			private Name 
+			private Amount 		it must be private 
+					write constructor empty or parameterized. 
+				helper method set the value. 
+				setAccno,setName,setAmount
+				getAccno, getName,getAmount 
+
+class MyBank extends AccountInitialization implements Bank {
+void transfer(fromaccNo,toAccNo,amount) {
+		fromAccNum : 1010 
+		toAccoNumber : 1011
+		amount 	must be +ve 
+		fromAccoNumber may not present 
+		toAccoNumber may not present 
+		Amount is not available 
+		Maintain min 500 in fromAccount Number 
+			
+}
+			Withdraw {
+				Accno
+					AccountNumber may be not present 
+				Amount 
+		Amount is not available 
+		Maintain min 500 in fromAccount Number 
+
+}
+			Deposit 	{
+				Accno
+					AccountNumber may be not present 
+				Amount 
+		Amount is not available 
+					Can’t deposit more than 50,000/- 
+} 
+			Checkbalance  {
+					Using account Number 
+}
+
+BankTest App 
+		Main method 
+		Do {
+			Switch() {
+
+1.Create Account
+a.Default details 
+b.Name and Amount pass;  
+2.Check Account Balance 
+3.Withdraw the amount 
+4.Deposit 
+5.Transfer
+6.Exit the Application 
+
+}
+				Do want to continue. 
+
+}while(condition)
+	
+ /////////////////////////////////////////////////////////////////////////////////////////////////////Welcome, thank */
+
+                                                                   
+                                                                                                                         
+import java.util.*;
+
+
+abstract class AccountInitialization {
+               Scanner obj=new Scanner(System.in);
+		static int accountCount=0;
+                Account accounts[]=new Account[10];		             
+            void accountCreate(String name,int amount) {
+                    int uniqueNumber=1010;
+                   if(amount>=500){
+                    Account acc = new Account(name,uniqueNumber,amount);
+                     System.out.println("YOUR ACCOUNT IS CREATED,YOUR ACCOUNT NUMBER IS"+uniqueNumber);
+                     uniqueNumber++;                                                                            	
+                    accounts[accountCount]=acc;
+                      accountCount++;
+                    }   
+                 }                                                                       
+        abstract void transfer(int fromaccNo,int toAccNo,int amount); 			
+   }     
+
+
+
+interface Bank{
+          void withdraw(int accNo,int amount); 		                                       
+	  void deposit(int accNo,int amount);		                                       
+	  void checkBalance(int accNo);    	                                                        
+  }                
+
+
+
+class Account{
+	   private int accNo;
+	   private String name; 
+	   private int amount; 		                        
+					                                       
+       public void setAccno(int accNo){
+              
+              this.accNo=accNo;
+             };
+       public void setName(String name){
+             this.name=name;
+           }; 		                                  
+       public void setAmount(int amount){
+              if(amount>500){
+              this.amount=amount;
+               }
+           };			                           
+				                                       
+
+        public int getAccno(){
+             return accNo;
+           };
+        public String getName(){ 
+              return name;
+          }; 		                                                
+	public int getAmount(){
+              return amount;
+         };
+ 
+       Account(String name,int accNo,int amount){
+          this.name=name;
+          this.accNo=accNo;
+          this.amount=amount;
+         }
+ }
+
+
+
+
+class MyBank extends AccountInitialization implements Bank { 
+      
+
+     void transfer(int fromaccNo,int toAccNo,int money) {  
+           for(int i=0;i<accountCount;i++){                                                       
+              if(fromaccNo==accounts[i].getAccno()){
+                if(accounts[i].getAmount()>money){
+                    int amount=accounts[i].getAmount()-money;
+                     accounts[i].setAmount(amount);
+                     System.out.println("TRANSFER IS SUCCESSFUL");
+                        }
+                else{
+                     System.out.println("BALANCE IS NOT SUFFICIENT");
+                   }
+              }
+            else{
+                System.out.println("ACCOUNT NUMBER IS NOT VALID");
+                }
+             }  
+         }
+    
+      public void withdraw(int accNo,int money) {
+		for(int i=0;i<accounts.length;i++){		                                                         
+		     if(accNo==accounts[i].getAccno()){			                                                    
+			 if(money>accounts[i].getAmount()){
+                               int amount=accounts[i].getAmount()-money;
+                               accounts[i].setAmount(amount);
+                               System.out.println("Withdrawl successful");
+                          }
+                          else{
+                               System.out.println("no sufficient amount");
+                            }	                                                            
+		      }  
+                     else{
+                         System.out.println("account no is invalid");
+                        }                                                                  
+		   }                                                                      
+
+              }
+			
+       public void deposit(int accNo,int money){
+				
+              for(int i=0;i<accounts.length;i++){		                                                        
+		   if(accNo==accounts[i].getAccno()){			                                                  
+			if(money>accounts[i].getAmount()){
+                               int amount=accounts[i].getAmount()+money;
+                               accounts[i].setAmount(amount);
+                               System.out.println("money is deposited");
+                          }
+                         else if(money>5000){
+                             System.out.println("cant deposite more than 5000 ata a time");
+                            }
+                          
+                          else{
+                               System.out.println("no sufficient amount");
+                            }	                                                            
+		      } 
+                    else{
+                       System.out.println("invalid account number");
+                    }                                                               
+		 }                 
+            } 
+        public void checkBalance(int accNo){
+              for(int i=0;i<accounts.length;i++){		                                                        
+		     if(accNo==accounts[i].getAccno()){			                                                  
+			System.out.println(accounts[i].getAmount());	
+                     }
+                     else{ 
+                       System.out.println("invalid account number");
+                     }
+                  } 
+              }  
+}  
+
+
+
+class BankTest{
+  public static void main(String[] args){
+      Scanner obj=new Scanner(System.in);
+      do{    
+            System.out.println("1.CREATE ACCOUNT");
+            System.out.println("2.CHECK ACCOUNT BALANCE");
+            System.out.println("3.WITHDRAW AMOUNT");
+            System.out.println("4.DEPOSIT MONEY");
+            System.out.println("5.TRANSFER AMOUNT");
+            System.out.println("6.EXIT THE APPLICATION");
+    
+            int n=obj.nextInt();
+  
+      switch(n){
+         case 1: System.out.println("TO CREATE YOUR ACCOUNT ENTER YOUR DETAILS (NAME,AMOUNT)");
+                  MyBank mb1=new MyBank();
+                  System.out.println("enter your name");
+                   String name=obj.next();
+                  System.out.println("enter amount");
+                   int amounts=obj.nextInt();
+                   mb1.accountCreate(name,amounts);
+                   break;
+         case 2:System.out.println("ENTER YOUR ACCOUNT NUMBER TO CHECK YOUR BALANCE");
+                   MyBank mb2=new MyBank();
+                    System.out.println("enter account number");
+                   int accNo=obj.nextInt();
+                   mb2.checkBalance(accNo);
+                   break;
+         case 3:System.out.println("ENTER YOUR ACCOUNT NUMBER AND AMOUNT THAT U NEED TO WITHDRAW");
+                   MyBank mb3=new MyBank();
+                   System.out.println("enter account number");
+                   int acc=obj.nextInt();
+                    System.out.println("enter amount to withdraw");
+                   int amount=obj.nextInt();
+                    mb3.withdraw(acc,amount);
+                   break;
+         case 4:System.out.println("ENTER ACCOUNT NUMBER AND MONEY U WANT TO DEPOSITE");
+                    MyBank mb4=new MyBank();
+                    System.out.println("enter account number");
+                   int accs=obj.nextInt();
+                    System.out.println("enter amount to withdraw");
+                   int amounty=obj.nextInt();
+                    mb4.deposit(accs,amounty);
+                    break;
+         case 5:System.out.println("ENTER DETAILS TO TRANSFER MONEY");
+                   MyBank mb5=new MyBank();
+                  System.out.println("enter account number from which you want to transfer");
+                    int fromaccNo=obj.nextInt();
+                   System.out.println("enter account number to which you want to transfer");
+                    int toAccNo=obj.nextInt();
+                   System.out.println("enter amount you want to transfer");
+                    int money=obj.nextInt();
+                   mb5.transfer(fromaccNo,toAccNo,money);
+                   break;
+         case 6: System.exit(0);
+                
+         default:System.out.println("invalid chice");
+                    break;
+               }
+         }while(true);
+         
+       } 
+}
+
+
+
+
+
+
+
+

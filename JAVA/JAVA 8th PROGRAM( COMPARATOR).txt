@@ -1,0 +1,199 @@
+package compareto;
+
+import java.util.*;
+import java.lang.*;
+
+public class CompareToDemo2{
+
+	public static void main(String[] args) {
+		Scanner obj=new Scanner(System.in);
+		List<Employee> ll=new ArrayList<Employee>();
+		
+		System.out.println("enter how many employee details you want to store");
+		int n=obj.nextInt();
+		Employee[] emps= new Employee[n];
+		System.out.println("enter Id");
+		System.out.println("enter Name");
+		System.out.println("enter Salary");
+		
+		for(int i=0;i<n;i++) {
+			int id=obj.nextInt();
+			String name=obj.next();
+			int salary=obj.nextInt();
+			emps[i]=new Employee(id,name,salary);
+			 ll.add(emps[i]);
+			 
+		}
+		
+		//Comparator<Employee> com= new Employee();
+		
+		System.out.println("chose one of the options for sorting index");
+		System.out.println("1.To sort by Id");
+		System.out.println("2.To sort by Name");
+		System.out.println("3.To sort by salart");
+		System.out.println("4.To exit");
+		int ch=obj.nextInt();
+		switch(ch) {
+		case 1:System.out.println("In which order u want to sort Id 1.ass or 2.des");
+		System.out.println("enter your choice 1 or 2");
+	       int m =obj.nextInt();
+	       if(m==1) {
+	    	  Collections.sort(ll,new SalaryAssOrder());
+           System.out.println(ll);
+	       }
+	       else if(m==2) {
+	    	   Collections.sort(ll,new SalaryDesOrder()); 
+	    	   System.out.println(ll);
+	       }
+			break;
+		case 2:System.out.println("In which order u want to sort Name 1.ass or 2.des");
+		 System.out.println("enter your choice 1 or 2");
+	       String m1 =obj.next();
+	       if(m1.equals("1")) {
+	    	 Collections.sort(ll,new NameAssOrder());
+           System.out.println(ll);
+	       }
+	       else if(m1.equals("2")) {
+	    	   Collections.sort(ll,new NameDesOrder()); 
+	    	   System.out.println(ll);
+	       }
+			break;
+		case 3:System.out.println("In which order u want to sort Salary 1.ass or 2.des");
+		 System.out.println("enter your choice 1 or 2");
+	       int m3 =obj.nextInt();
+	       if(m3==1) {
+	    	  Collections.sort(ll,new SalaryAssOrder());
+              System.out.println(ll);
+	       }
+	       else if(m3==2) {
+	    	   Collections.sort(ll,new SalaryDesOrder()); 
+	    	   System.out.println(ll);
+	       }
+			break;
+		case 4: System.exit(0);	
+		default:
+			System.out.println("invalid choice");
+		}
+		
+		
+		
+	}
+
+}
+
+package compareto;
+
+import java.util.*;
+import java.lang.*;
+
+public class Employee {
+	Scanner obj1=new Scanner(System.in);
+     private int id;
+     private String name;
+     private int salary;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	
+	
+	public Employee() {
+		super();
+	}
+	public Employee(int id, String name, int salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
+	
+     } 
+	 
+     
+}
+
+package compareto;
+
+import java.util.*;
+
+public class IdAccOrder implements Comparator<Employee>{
+	public int compare(Employee emp1,Employee emp2) {
+		return emp1.getId()-emp2.getId();
+	}
+
+}
+
+package compareto;
+
+import java.util.*;
+
+public class IdDesOrder  implements Comparator<Employee> {
+	public int compare(Employee emp1,Employee emp2) {
+		return emp2.getId()-emp1.getId();
+	}
+}
+
+package compareto;
+
+import java.util.*;
+import java.lang.*;
+
+public class NameAssOrder implements Comparator<Employee> {
+	public int compare(Employee emp1,Employee emp2) {
+		return emp1.getName().compareTo(emp2.getName());
+	}
+}
+
+package compareto;
+
+import java.util.*;
+
+public class NameDesOrder implements Comparator<Employee>{
+	public int compare(Employee emp1,Employee emp2) {
+		return emp2.getName().compareTo(emp1.getName());
+	}
+}
+
+package compareto;
+
+import java.util.Comparator;
+
+public class SalaryAssOrder  implements Comparator<Employee> {
+	public int compare(Employee emp1,Employee emp2) {
+		return emp1.getSalary()-emp2.getSalary();
+	}
+}
+
+package compareto;
+
+import java.util.*;
+
+public class SalaryDesOrder implements Comparator<Employee> {
+	public int compare(Employee emp1,Employee emp2) {
+		return emp2.getSalary()-emp1.getSalary();
+	}
+}
+
+
+
+
+
+
