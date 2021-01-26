@@ -1,0 +1,434 @@
+/* Sprint 3 : Storage file system replace by database system. 
+
+Database as well as Java8 Stream API 
+
+
+3nd Mini Project 
+Sprint 3
+
+Product  bean package 
+		pid, pname, price,datepurchase 
+
+Pure Business Logic 
+
+ProductService - service package 	don’t use System.out.println in service 
+			List/Set/Map of Product object. 
+			
+			addProduct() :	product object as parameter  
+					price > 500 	Before calling database	
+ 			Dao method call to store the records 
+
+			deleteProduct() delete using Pid 	no business logic
+			
+			updateProduct() 				no business logic 
+					pid, price 
+
+			displayProduct() 			after retrieve business logic
+					20% + actual price using Stream API 
+			dispalyAllProductLowPrice() Asc Price 
+			displayAllProductHighPrice() Des Price 
+			displayAllProductName() Asc 
+			displayAllProductName() Desc 		Using Stream API 
+
+
+
+
+
+			
+ProductDao : 		dao package 
+
+DAO Layer (Pure JDBC Logic)
+
+				addProduct(Product pp) {
+					JDBC code to store the product 
+						Primary key 
+}
+deleteProduct(pid ) {
+			
+}
+updateProduct(Product pp) {
+		
+}
+List<Product> retrieveAllProduct() {
+		Using ResultSet retrieve all records and convert to object and store in List/Set/Map  	
+}								
+					
+
+Product table  Product class 
+PID			pid 
+PName		pname
+PRICE		price 
+
+main
+
+		Product Operation 
+
+				Main Method 
+				do {
+					1:Add
+					2:Update 
+					3:Delete 
+					4:DisplayAll 
+					5: ProductNameAsc
+					6:ProductNameDesc
+					7:PriceLow 
+					8:PriceHigh 
+switch(){
+
+}      */
+
+
+package bean;
+
+import java.time.*;
+import java .util.Date;
+
+public class Product {
+	private int pId;
+	private String pName;
+	private float pPrice;
+	private Date datepurchase;
+	
+	public int getpId() {
+		return pId;
+	}
+	public void setpId(int pId) {
+		this.pId = pId;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public float getpPrice() {
+		return pPrice;
+	}
+	public void setpPrice(float pPrice) {
+		this.pPrice = pPrice;
+	}
+	public Date getDatepurchase() {
+		return datepurchase;
+	}
+	public void setDatepurchase(Date datepurchase) {
+		this.datepurchase = datepurchase;
+	}
+	@Override
+	public String toString() {
+		return "Product [pId=" + pId + ", pName=" + pName + ", pPrice=" + pPrice + ", datepurchase=" + datepurchase
+				+ "]";
+	}
+	public Product(int pId, String pName, float pPrice, Date datepurchase) {
+		super();
+		this.pId = pId;
+		this.pName = pName;
+		this.pPrice = pPrice;
+		this.datepurchase = datepurchase;
+	}
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+}
+
+
+
+package main;
+import service.ProductService;
+import bean.Product;
+import java.util.Scanner;
+
+import service.ProductService;
+import java.util.*;
+public class ProductOperations {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		  Scanner obj=new Scanner(System.in);
+	      //Map<Integer,Product> hm=new HashMap<Integer,Product>();
+	      //ProductService =new ProductService();
+		 
+	      
+			do {
+				 System.out.println("Choose Operation you want to perform");
+			      System.out.println("1.Add Product");
+			      System.out.println("2.Update Product");
+			      System.out.println("3.Delete Product");
+			      System.out.println("4.Display All Product");
+			      System.out.println("5: Product-Name-Asc");
+			      System.out.println("6:Product-Name-Desc");
+			      System.out.println("7:Price-Low ");
+			      System.out.println("8:Price-High");
+			      System.out.println("9.Exit application");
+				     int ch=obj.nextInt();
+				switch(ch){
+				case 1:ProductService ps1 = new ProductService();
+					   Product p=new Product();
+				       ps1.addProduct(p);
+				      break;
+				case 2:ProductService ps2 = new ProductService();
+				       ps2.updateProduct();
+					  break;
+				case 3:ProductService ps3 = new ProductService();
+				       ps3.deleteProduct();
+					  break;
+				case 4:ProductService ps4 = new ProductService();
+				       ps4.getAllProduct().stream().forEach(p1->System.out.println(p1));
+					  break;
+				case 5:ProductService ps5 = new ProductService();
+				      ps5.productNameAss().stream().map(pro->pro.getpName()).sorted().forEach(name->System.out.println(name));
+					  break;
+				case 6:ProductService ps6 = new ProductService();
+				      ps6.productNameDes().stream().map(pro->pro.getpName()).sorted().forEach(name->System.out.println(name));
+					  break;
+				case 7:ProductService ps7 = new ProductService();
+			          ps7.productPriceAss().stream().map(pro->pro.getpPrice()).sorted().forEach(price->System.out.println(price));
+					  break;
+				case 8:ProductService ps8 = new ProductService();
+		               ps8.productPriceDes().stream().map(pro->pro.getpPrice()).sorted().forEach(price->System.out.println(price));
+					  break;
+				case 9:System.exit(0);
+				default:System.out.println("Invalid choice");
+				}
+	         }while(true);
+	}
+}
+
+
+package service;
+import dao.ProductDao;
+import java.util.*;
+import java.util.stream.*;
+import bean.Product;
+public class ProductService {
+	
+	public void addProduct(Product pro){
+		ProductDao pd1= new ProductDao();
+		pd1.addProduct(pro);
+	}
+    public void updateProduct() {
+    	ProductDao pd2= new ProductDao();
+    	pd2.updateProduct();
+    }
+    public void deleteProduct(){
+    	ProductDao pd3= new ProductDao();
+    	pd3.deleteProduct();
+    }
+    public List<Product> getAllProduct() {
+		ProductDao pd4 = new ProductDao();
+		//return pd.getAllProduct();
+		
+		return pd4.getAllProduct();
+	}
+    public List<Product> productNameAss(){
+    	ProductDao pd5 = new ProductDao();
+    	return pd5.productNameAss();
+    }
+    public List<Product> productNameDes(){
+    	ProductDao pd6 = new ProductDao();
+    	return pd6.productNameDes();
+    }
+    public List<Product> productPriceAss(){
+    	ProductDao pd7 = new ProductDao();
+    	return pd7.productPriceAss();
+    }
+    public List<Product> productPriceDes(){
+    	ProductDao pd8 = new ProductDao();
+    	return pd8.productPriceAss();
+    }
+}
+
+
+package dao;
+import bean.Product;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.*;
+import java.text.*;
+//import java.util.Date;
+
+public class ProductDao {
+    Scanner obj=new Scanner(System.in); 
+	public void addProduct(Product p) {
+	    try {
+	    	Class.forName("com.mysql.cj.jdbc.Driver");
+	    	Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","modeltiger1");
+	    	PreparedStatement ps= con.prepareStatement("insert into product values(?,?,?)");
+	    	System.out.println("Enter Product Id");
+	    	int pId=obj.nextInt();
+	    	p.setpId(pId);
+	    	System.out.println("Enter Product Name");
+	    	String pName=obj.next();
+	    	p.setpName(pName);
+	    	System.out.println("Enter Product Price");
+	    	float pPrice=obj.nextFloat();
+	    	p.setpPrice(pPrice);
+	    	
+	    	
+	    	 System.out.println("Enter Product Purchase Date");
+	    	 String datePurchase=obj.next();
+	    	 SimpleDateFormat sdf= new SimpleDateFormat("dd-mm-yyyy");
+	    	 java.util.Date datepurchase=sdf.parse(datePurchase);
+	    	 p.setDatepurchase(datepurchase);
+	         long ms=p.getDatepurchase().getTime();
+	    	 java.sql.Date aqd=new java.sql.Date(ms);
+	    	 
+	    	ps.setInt(1,p.getpId());
+	    	ps.setString(2,p.getpName());
+	    	ps.setFloat(3,p.getpPrice());
+	    	ps.setDate(4,aqd);
+	    	
+	    	int res=ps.executeUpdate();
+	    	if(res==0) {
+	    		System.out.println("There is no record to insert");
+	    	}
+	    	else {
+	    		System.out.println("Record Inserted");
+	    	}
+	    	
+	    }catch(Exception e) {
+	    	
+	    }
+	}
+	
+	public void updateProduct() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","modeltiger1");
+			PreparedStatement stm= con.prepareStatement("update product set pPrice= ? where pId=?");
+			System.out.println("Enter pId whoes price u want to update");
+			int pId=obj.nextInt();
+			System.out.println("Enter the price u want to update");
+			float pPrice=obj.nextFloat();
+			stm.setInt(1,pId);
+			stm.setFloat(2, pPrice);
+			stm.executeUpdate();
+			System.out.println("record get Updated");
+		}catch(Exception e) {
+			
+		}
+	}
+	
+	public void deleteProduct() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","modeltiger1");
+			PreparedStatement stm= con.prepareStatement("delete from product where pId=?");
+			System.out.println("Enter pId whoes details u want to delete");
+			int pId=obj.nextInt();
+			stm.setInt(1,pId);
+			stm.executeUpdate();
+			System.out.println("record get deleted");
+			}catch(Exception e) {
+			
+		}
+	}
+	public List<Product> getAllProduct() {
+		List<Product> listOfProduct = new ArrayList<>();
+		try {
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+			PreparedStatement pstmt = con.prepareStatement("select * from product");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Product p = new Product();
+				p.setpId(rs.getInt("pId"));
+				p.setpName(rs.getString("pName"));
+				p.setpPrice(rs.getFloat(3));
+				//p.setStoreDate(rs.getDate(4));	We have to convert SQL Date format to Java7/Java8 Date format.
+				p.setDatepurchase(rs.getDate(4));     // conveting SQL date to LocalDate format. 
+				listOfProduct.add(p);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listOfProduct;
+	}
+	 public List<Product> productNameAss(){
+		 List<Product> listOfProduct = new ArrayList<>();
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+				PreparedStatement pstmt = con.prepareStatement("select * from product");
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product p = new Product();
+					p.setpId(rs.getInt("pId"));
+					p.setpName(rs.getString("pName"));
+					p.setpPrice(rs.getFloat(3));
+					//p.setStoreDate(rs.getDate(4));	We have to convert SQL Date format to Java7/Java8 Date format.
+					p.setDatepurchase(rs.getDate(4));     // conveting SQL date to LocalDate format. 
+					listOfProduct.add(p);
+				}
+		 }catch(Exception e) {
+			 
+		 }
+		 return listOfProduct;
+	 }
+	 public List<Product> productNameDes(){
+		 List<Product> listOfProduct = new ArrayList<>();
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+				PreparedStatement pstmt = con.prepareStatement("select * from product");
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product p = new Product();
+					p.setpId(rs.getInt("pId"));
+					p.setpName(rs.getString("pName"));
+					p.setpPrice(rs.getFloat(3));
+					//p.setStoreDate(rs.getDate(4));	We have to convert SQL Date format to Java7/Java8 Date format.
+					p.setDatepurchase(rs.getDate(4));     // conveting SQL date to LocalDate format. 
+					listOfProduct.add(p);
+				}
+		 }catch(Exception e) {
+			 
+		 }
+		 return listOfProduct;
+	 }
+	 public List<Product> productPriceAss(){
+		 List<Product> listOfProduct = new ArrayList<>();
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+				PreparedStatement pstmt = con.prepareStatement("select * from product");
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product p = new Product();
+					p.setpId(rs.getInt("pId"));
+					p.setpName(rs.getString("pName"));
+					p.setpPrice(rs.getFloat(3));
+					//p.setStoreDate(rs.getDate(4));	We have to convert SQL Date format to Java7/Java8 Date format.
+					p.setDatepurchase(rs.getDate(4));     // conveting SQL date to LocalDate format. 
+					listOfProduct.add(p);
+				}
+		 }catch(Exception e) {
+			 
+		 }
+		 return listOfProduct;
+	 }
+	 public List<Product> productPriceDes(){
+		 List<Product> listOfProduct = new ArrayList<>();
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+				PreparedStatement pstmt = con.prepareStatement("select * from product");
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product p = new Product();
+					p.setpId(rs.getInt("pId"));
+					p.setpName(rs.getString("pName"));
+					p.setpPrice(rs.getFloat(3));
+					//p.setStoreDate(rs.getDate(4));	We have to convert SQL Date format to Java7/Java8 Date format.
+					p.setDatepurchase(rs.getDate(4));     // conveting SQL date to LocalDate format. 
+					listOfProduct.add(p);
+				}
+		 }catch(Exception e) {
+			 
+		 }
+		 return listOfProduct;
+	 }
+}
