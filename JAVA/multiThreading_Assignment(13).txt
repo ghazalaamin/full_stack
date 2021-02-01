@@ -1,0 +1,115 @@
+/*Assignment : Consumer Producer 
+
+Consumer and Producer : using inter thread communication 
+
+Put and Get 
+Pay amount and Get Ticket : Resources 
+Withdraw and Deposit : Amount Resources 
+
+Deposit 		put 		consumer 
+Withdraw 		get		produce 
+Deposit 		put 		consumer 
+Withdraw 		get		produce 
+Deposit 		put 
+Withdraw 
+Deposit 
+Withdraw */
+
+
+
+
+class ConPro{
+	int n;
+	boolean val=false;
+	
+	public synchronized void put(int n) 
+	{
+	   while(val) {
+		   try {
+			   wait();
+		   }
+		   catch(Exception e) {
+			   
+		   }
+	   }
+	   System.out.println("Put : "+n);
+	   this.num=num;
+	   val=true;
+	   notify();
+	}
+	
+	public synchronized void get()
+	{
+		while(!val)
+		{
+			try {
+				wait();
+			}
+			catch(Exception e) {
+				
+			}
+		}
+		System.out.println("get : "+n);
+		val=false;
+		notify();
+	}
+	
+}
+
+class Producer implements Runnable
+{
+	ConPro cp;
+	public Producer(ConPro cp)
+	{
+		this.cp=cp;
+		Thread t=new Thread(this,"Producer");
+		t.start();
+	}
+	public void run() {
+		int i=0;
+		while(true)
+		{
+			cp.put(i++);
+			try {
+				Thread.sleep(500);
+			}
+			catch(Exception e) {
+				
+			}
+		}
+	}
+}
+
+class Consumer implements Runnable
+{
+	ConPro cp;
+	public Consumer(ConPro cp)
+	{
+		this.cp=cp;
+		Thread t=new Thread(this,"Consumer");
+		t.start();
+	}
+	public void run() {
+		while(true)
+		{
+			q.get();
+			try {
+				Thread.sleep(5000);
+			}
+			catch(Exception e) {
+				
+			}
+		}
+	}
+}
+
+public class ConsumerProducer {
+
+	public static void main(String[] args) {
+		ConPro cp=new ConPro();
+		new Producer(cp);
+		new Consumer(cp);
+		
+	}
+
+}
