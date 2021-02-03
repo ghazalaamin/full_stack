@@ -1,0 +1,12 @@
+*{   
+    text-align: center;
+    margin :10px 2px;
+
+}
+body{
+    background: linear-gradient(to right,#33ccff 0%, #ff99cc 100%);
+}
+
+button{
+    padding: 10px 25px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        do{
+        var a = prompt("Enter the value of a ");
+        var b = prompt("Enter the value of b ");
+        var c =  eval(prompt("enter 1-Add and 2-sub"));
+         
+      
+         switch(c){
+                 case 1:
+                       var sum=eval(a)+eval(b);
+                         alert("sum of the number is"+sum);
+                         break;
+                 case 2:  
+                       var sum=eval(a)-eval(b); 
+                         alert("difference of the number is"+sum);
+                         break;        
+             }
+             var res = confirm("do you really wanted to close");
+             if(res){
+                 exit(0);
+             }
+
+
+        }while(true);
+
+    </script>
+</body>
+</html>
